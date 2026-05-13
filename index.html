@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Kapasa Makasa Optics | Premium Spectacles</title>
+    <!-- FontAwesome 6 (free icons for visual enhancement) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fc 0%, #e9edf2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ----- sticky navigation with logo & brand ----- */
+        .navbar {
+            background: rgba(10, 25, 47, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 0.7rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            border-bottom: 2px solid #f5b042;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* logo image: we use "KMU logo.jfif" — you place it in same folder */
+        .logo-img {
+            height: 52px;
+            width: auto;
+            max-width: 130px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: white;
+            padding: 4px 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #FFE6B0;
+            letter-spacing: 1px;
+        }
+        .logo-text span {
+            color: #f5b042;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            align-items: center;
+        }
+        .nav-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            color: #f0f3f8;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-btn i {
+            font-size: 1.1rem;
+        }
+        .nav-btn.active {
+            background: #f5b042;
+            color: #1e2a3e;
+            box-shadow: 0 2px 8px rgba(245,176,66,0.3);
+        }
+        .nav-btn:hover:not(.active) {
+            background: rgba(245,176,66,0.2);
+            color: #f5b042;
+        }
+
+        /* main container */
+        .page-container {
+            flex: 1;
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem 2rem;
+            width: 100%;
+        }
+
+        /* page visibility */
+        .page {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+        .page.active-page {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* ========== HOME PAGE ========== */
+        .hero {
+            background: linear-gradient(115deg, #ffffff 0%, #fef7e0 100%);
+            border-radius: 56px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(245,176,66,0.3);
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1f2f3e, #b45f1b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #2c3e2f;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2.5rem 0 1rem;
+            justify-content: center;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 36px;
+            padding: 1.8rem;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .feature-card i {
+            font-size: 2.6rem;
+            color: #f5b042;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+        }
+        .btn-shop-now {
+            background: #1e2a3e;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 1.8rem;
+            transition: 0.2s;
+        }
+        .btn-shop-now:hover {
+            background: #f5b042;
+            color: #1e2a3e;
+            transform: scale(1.02);
+        }
+
+        /* ========== PRODUCTS SLIDE PAGE ========== */
+        .slider-container {
+            background: #fffef7;
+            border-radius: 52px;
+            padding: 2rem 1rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+        }
+        .slider-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .slider-header h2 {
+            font-size: 2rem;
+            color: #1e2a3e;
+        }
+        .slider-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide-track {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 44px;
+        }
+        .slide-items {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            gap: 1.8rem;
+            padding: 0.5rem 0.2rem;
+        }
+        .product-card {
+            flex: 0 0 calc(33.333% - 1.2rem);
+            min-width: 260px;
+            background: white;
+            border-radius: 36px;
+            padding: 1.2rem;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.2s;
+            border: 1px solid #eee5d8;
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 28px;
+            background: #f3efE8;
+            margin-bottom: 1rem;
+        }
+        .product-card h3 {
+            font-size: 1.4rem;
+            margin: 0.5rem 0;
+        }
+        .price {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #b45f1b;
+            margin: 0.6rem 0;
+        }
+        .price small {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .currency-zmw {
+            font-weight: 700;
+            background: #fef1df;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            margin-right: 6px;
+        }
+        .slide-arrow {
+            background: #1e2a3ecc;
+            backdrop-filter: blur(4px);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            cursor: pointer;
+            margin: 0 6px;
+            transition: 0.15s;
+        }
+        .slide-arrow:hover {
+            background: #f5b042;
+            color: #1e2a3e;
+        }
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 1.8rem;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #ccc;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .dot.active-dot {
+            background: #f5b042;
+            width: 28px;
+        }
+
+        /* ========== CONTACT PAGE ========== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            background: white;
+            border-radius: 48px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+        }
+        .info-card, .shop-card {
+            background: #fefaf5;
+            border-radius: 32px;
+            padding: 1.8rem;
+        }
+        .seller-profile {
+            display: flex;
+            align-items: center;
+            gap: 1.3rem;
+            margin-bottom: 2rem;
+            background: #fff3e6;
+            padding: 1rem;
+            border-radius: 90px;
+        }
+        /* profile image container – completely removed image, only text & icon remain clean */
+        .seller-avatar-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #f5b042, #e09d32);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            border: 3px solid white;
+        }
+        .seller-avatar-icon i {
+            font-size: 3rem;
+            color: white;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .shop-details i, .info-card i {
+            width: 32px;
+            color: #f5b042;
+        }
+        .shop-details p, .info-card p {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .map-placeholder {
+            background: #d9d2c5;
+            height: 150px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            color: #2c3e2f;
+        }
+
+        @media (max-width: 880px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .product-card { flex: 0 0 calc(50% - 1rem); }
+            .hero p { max-width: 100%; }
+            .navbar { flex-direction: column; gap: 12px; }
+        }
+        @media (max-width: 640px) {
+            .product-card { flex: 0 0 100%; }
+            .slide-arrow { width: 38px; height: 38px; font-size: 1.4rem; }
+        }
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #5f6c7a;
+            font-size: 0.8rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand-logo">
+        <!-- logo image: "KMU logo.jfif" placed in same folder -->
+        <img src="KMU logo.jfif" alt="Kapasa Makasa University Logo" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/100x60?text=KMU+Logo';">
+        <div class="logo-text"><span>KAPASA MAKASA</span> OPTICS</div>
+    </div>
+    <div class="nav-links">
+        <button class="nav-btn" data-page="home"><i class="fas fa-home"></i> Home</button>
+        <button class="nav-btn" data-page="products"><i class="fas fa-glasses"></i> Spectacles</button>
+        <button class="nav-btn" data-page="contact"><i class="fas fa-address-card"></i> Contact</button>
+    </div>
+</nav>
+
+<div class="page-container">
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active-page">
+        <div class="hero">
+            <h1>See the World <br>with Clarity & Style</h1>
+            <p>Premium spectacles crafted for your comfort. Ultimate eye protection, modern design, and vision perfection. Elevate your everyday look with Kapasa Makasa Optics.</p>
+            <button class="btn-shop-now" id="exploreProductsBtn"><i class="fas fa-arrow-right"></i> Explore Collection</button>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card"><i class="fas fa-eye"></i><h3>Blue Cut Lenses</h3><p>Reduce eye strain from digital screens</p></div>
+            <div class="feature-card"><i class="fas fa-sunglasses"></i><h3>Polarized UV400</h3><p>100% UV protection & anti-glare</p></div>
+            <div class="feature-card"><i class="fas fa-moon"></i><h3>Night Vision Ready</h3><p>Enhanced contrast for night driving</p></div>
+        </div>
+        <div style="text-align: center; margin-top: 1rem;">
+            <i class="fas fa-tag" style="color:#f5b042;"></i> <strong>Free shipping in Zambia | 2-Year Warranty</strong>
+        </div>
+    </div>
+
+    <!-- PRODUCTS SLIDE PAGE (slide motion, prices in ZMW, using your provided images) -->
+    <div id="productsPage" class="page">
+        <div class="slider-container">
+            <div class="slider-header">
+                <h2><i class="fas fa-glasses"></i> Our Signature Spectacles</h2>
+                <p>Swipe or click arrows — Premium eyewear in Zambian Kwacha (ZMW)</p>
+            </div>
+            <div class="slider-wrapper">
+                <button class="slide-arrow" id="prevSlideBtn"><i class="fas fa-chevron-left"></i></button>
+                <div class="slide-track">
+                    <div class="slide-items" id="productSlider">
+                        <!-- dynamic products injected via JS -->
+                    </div>
+                </div>
+                <button class="slide-arrow" id="nextSlideBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="dots" id="dotsContainer"></div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE: Female Optician profile with NO profile picture (blank removed) – elegant icon instead -->
+    <div id="contactPage" class="page">
+        <div class="contact-grid">
+            <div class="info-card">
+                <h2><i class="fas fa-store"></i> Shop Details</h2>
+                <div class="shop-details">
+                    <p><i class="fas fa-map-marker-alt"></i> Location: Plot 123, Great East Road, Lusaka, Zambia</p>
+                    <p><i class="fas fa-clock"></i> Mon–Sat: 09:00 – 18:00 | Sunday: Closed</p>
+                    <p><i class="fas fa-phone-alt"></i> +260 97 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> optics@kapasamakasa.edu.zm</p>
+                </div>
+                <div class="map-placeholder">
+                    <i class="fas fa-map"></i> 📍 Opposite EastPark Mall, Lusaka
+                </div>
+            </div>
+            <div class="shop-card">
+                <h2><i class="fas fa-user-circle"></i> Meet Your Optician</h2>
+                <div class="seller-profile">
+                    <!-- PROFILE IMAGE COMPLETELY REMOVED — replaced with a stylish icon for a professional female optician (no blank image) -->
+                    <div class="seller-avatar-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div>
+                        <h3>Ms. Amina Chaponda</h3>
+                        <p>Certified Optometrist | 14+ years experience</p>
+                        <i class="fas fa-star" style="color:gold;"></i> 4.9 ★ Trusted by 2000+ clients
+                    </div>
+                </div>
+                <p><i class="fas fa-building"></i> <strong>Kapasa Makasa Optical Boutique</strong> – official partner of KMU Vision Centre. We provide eye exams, custom lenses, and premium frames.</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp: +260 97 765 4321</p>
+                <p><i class="fas fa-globe"></i> www.kmuoptics.zm</p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <i class="far fa-copyright"></i> 2025 Kapasa Makasa University Optics – Clear Vision, Bright Future. All prices in ZMW (Zambian Kwacha)
+</footer>
+
+<script>
+    // ==================== PRODUCT DATA (Zambian Kwacha - ZMW) ====================
+    // PRODUCT IMAGES: Using your WhatsApp image files. Place these in the SAME FOLDER as this HTML.
+    
+    const products = [
+        { 
+            id: 1, 
+            name: "Foster Grant NVG 2.5", 
+            price: 2199, 
+            image: "WhatsApp Image 2026-05-12 at 10.53.05 AM.jpeg", 
+            desc: "2.5 NVG by Foster Grant • H303 02-52 • Premium night vision aid" 
+        },
+        { 
+            id: 2, 
+            name: "Aviator Titanium", 
+            price: 1899, 
+            image: "WhatsApp Image 2026-05-12 at 10.53.07 AM.jpg", 
+            desc: "Gold frame, polarized lenses – timeless style" 
+        },
+        { 
+            id: 3, 
+            name: "Retro Round Vintage", 
+            price: 1250, 
+            image: "WhatsApp Image 2026-05-12 at 11.02.54 AM.jpg", 
+            desc: "Classic tortoise shell, lightweight" 
+        },
+        { 
+            id: 4, 
+            name: "Square Edge Pro", 
+            price: 2450, 
+            image: "WhatsApp Image 2026-05-12 at 11.02.50 AM.jpg", 
+            desc: "Matte black, blue cut lenses" 
+        },
+        { 
+            id: 5, 
+            name: "Sports Flexi", 
+            price: 1650, 
+            image: "WhatsApp Image 2026-05-12 at 11.02.49 AM.jpg", 
+            desc: "Impact resistant, rubber grip for active lifestyle" 
+        },
+        { 
+            id: 6, 
+            name: "Oversized Cat-eye", 
+            price: 1999, 
+            image: "WhatsApp Image 2026-05-12 at 11.02.49 AM.jpg", 
+            desc: "Trendy & lightweight frame" 
+        },
+        { 
+            id: 7, 
+            name: "Wooden Classic", 
+            price: 2790, 
+            image: "WhatsApp Image 2026-05-12 at 10.53.05 AM.jpg", 
+            desc: "Eco-friendly bamboo frame, unique finish" 
+        }
+    ];
+    
+    // Fallback placeholder image for products (in case image not found)
+    const defaultImg = "https://placehold.co/400x280/EEE5D8/A56B2F?text=Kapasa+Optics";
+    
+    let currentIndex = 0;
+    let slidesToShow = 3;
+    let totalProducts = products.length;
+    
+    const sliderContainer = document.getElementById("productSlider");
+    const dotsContainer = document.getElementById("dotsContainer");
+    const prevBtn = document.getElementById("prevSlideBtn");
+    const nextBtn = document.getElementById("nextSlideBtn");
+    
+    function updateSlidesToShow() {
+        if (window.innerWidth <= 640) slidesToShow = 1;
+        else if (window.innerWidth <= 880) slidesToShow = 2;
+        else slidesToShow = 3;
+        const maxIndex = Math.max(0, totalProducts - slidesToShow);
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
+        if (currentIndex < 0) currentIndex = 0;
+        renderSlider();
+        updateDots();
+    }
+    
+    function renderSlider() {
+        if (!sliderContainer) return;
+        const maxIndex = Math.max(0, totalProducts - slidesToShow);
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
+        if (currentIndex < 0) currentIndex = 0;
+        
+        const visibleProducts = products.slice(currentIndex, currentIndex + slidesToShow);
+        let html = '';
+        for (let i = 0; i < visibleProducts.length; i++) {
+            const p = visibleProducts[i];
+            const imageSrc = p.image || defaultImg;
+            html += `
+                <div class="product-card">
+                    <img src="${imageSrc}" alt="${p.name}" onerror="this.src='${defaultImg}'">
+                    <h3>${p.name}</h3>
+                    <div class="price"><span class="currency-zmw">ZMW</span> ${p.price.toLocaleString()}</div>
+                    <p style="font-size:0.8rem; margin-bottom:0.5rem;">${p.desc}</p>
+                    <i class="fas fa-star" style="color:#f5b042;"></i> <i class="fas fa-shield-alt"></i> Warranty
+                </div>
+            `;
+        }
+        sliderContainer.innerHTML = html;
+    }
+    
+    function updateDots() {
+        if (!dotsContainer) return;
+        const maxIndex = Math.max(0, totalProducts - slidesToShow);
+        const totalDots = maxIndex + 1;
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i <= maxIndex; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === currentIndex) dot.classList.add('active-dot');
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                renderSlider();
+                updateDots();
+            });
+            dotsContainer.appendChild(dot);
+        }
+        if (totalDots === 0 || totalProducts === 0) {
+            dotsContainer.innerHTML = '<span style="font-size:0.8rem;">✨ premium collection</span>';
+        }
+    }
+    
+    function slidePrev() {
+        const maxIndex = Math.max(0, totalProducts - slidesToShow);
+        if (currentIndex > 0) {
+            currentIndex--;
+            renderSlider();
+            updateDots();
+        }
+    }
+    
+    function slideNext() {
+        const maxIndex = Math.max(0, totalProducts - slidesToShow);
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            renderSlider();
+            updateDots();
+        }
+    }
+    
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            updateSlidesToShow();
+        }, 150);
+    });
+    
+    // ========== PAGE NAVIGATION ==========
+    const pages = {
+        home: document.getElementById('homePage'),
+        products: document.getElementById('productsPage'),
+        contact: document.getElementById('contactPage')
+    };
+    const navBtns = document.querySelectorAll('.nav-btn');
+    
+    function switchPage(pageId) {
+        Object.keys(pages).forEach(key => {
+            pages[key].classList.remove('active-page');
+        });
+        pages[pageId].classList.add('active-page');
+        navBtns.forEach(btn => {
+            const pageAttr = btn.getAttribute('data-page');
+            if (pageAttr === pageId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        if (pageId === 'products') {
+            updateSlidesToShow();
+        }
+    }
+    
+    navBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const pageTarget = btn.getAttribute('data-page');
+            if (pageTarget === 'home') switchPage('home');
+            else if (pageTarget === 'products') switchPage('products');
+            else if (pageTarget === 'contact') switchPage('contact');
+        });
+    });
+    
+    const exploreBtn = document.getElementById('exploreProductsBtn');
+    if (exploreBtn) {
+        exploreBtn.addEventListener('click', () => switchPage('products'));
+    }
+    
+    if (prevBtn) prevBtn.addEventListener('click', slidePrev);
+    if (nextBtn) nextBtn.addEventListener('click', slideNext);
+    
+    // Initial load: setup products slider & responsive
+    updateSlidesToShow();
+    
+    console.log("✅ Kapasa Makasa Optics is ready!\n📁 REQUIRED IMAGES: KMU logo.jfif and WhatsApp product images in same folder.\n✨ Female optician profile image removed – stylish icon displayed instead. No blank picture.");
+</script>
+</body>
+</html>
